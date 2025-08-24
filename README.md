@@ -2,7 +2,7 @@
 ```bash
 !tar -zxvf twitter-media-downloader-v1.14.2-linux-amd64.tar.gz
 
-!./twitter-media-downloader -u Shoji_ai -a
+!./twitter-media-downloader -u Shoji_ai -a -n 10000 -L
 ```
 
 # twmd: CLI twitter media downloader (without api key)
