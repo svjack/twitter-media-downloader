@@ -1,3 +1,10 @@
+# colab
+```bash
+!tar -zxvf twitter-media-downloader-v1.14.2-linux-amd64.tar.gz
+
+!./twitter-media-downloader -u Shoji_ai -a
+```
+
 # twmd: CLI twitter media downloader (without api key)
 
 This twitter downloader doesn't require Credentials or an api key. It's based on [twitter-scrapper](https://github.com/imperatrona/twitter-scraper).
