@@ -1,9 +1,16 @@
 # colab
+
+- twitter
+
 ```bash
 !tar -zxvf twitter-media-downloader-v1.14.2-linux-amd64.tar.gz
 
 !./twitter-media-downloader -u Shoji_ai -a -n 10000 -L
 ```
+
+- Midjourney
+
+midjourney_image_scraper.py
 
 # twmd: CLI twitter media downloader (without api key)
 
