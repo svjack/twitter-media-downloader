@@ -399,6 +399,21 @@ except Exception as e:
 
 #### dataset construction
 
+def get_almost_sref(x):
+    x = x.split("--sref")[-1]
+    return Path(x).stem.split('-')[0] if '-' in Path(x).stem else Path(x).stem
+
+def get_first_all_numbers(x):
+    #print("x :", x)
+    l = x.strip().split("_")
+    req = x
+    #print("l :", l)
+    for ele in l:
+        if ele.strip() and all(map(lambda y: y in "0123456789", ele)):
+            #print("ele :" ,ele)
+            return ele
+    return req
+
 import pathlib 
 import pandas as pd 
 import os
@@ -410,10 +425,17 @@ pd.Series(
 ).map(str)
 )
 df.columns = ["image"]
-df["sref"] = df["image"].map(lambda x: Path(x).stem.split('-')[0] if '-' in Path(x).stem else Path(x).stem)
-df
+df["filename"] = df["image"].map(lambda x: x.split("/")[-1])
+df["sref"] = df["image"].map(get_almost_sref)
+df["sref"] = df["sref"].map(get_first_all_numbers) 
+df = df[
+    df["sref"].map(
+        lambda x: bool(x.strip()) and all(map(lambda y: y in "0123456789", x.strip()))
+    )
+].reset_index().iloc[:, 1:]
 
 ds = Dataset.from_pandas(df.sort_values("sref").reset_index().iloc[:, 1:]).cast_column("image", HfImage())
+ds
 
 !huggingface-cli login 
 
